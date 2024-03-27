@@ -1,12 +1,23 @@
-import React, { useEffect } from 'react'
+import React, { useState,useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'; 
 
 import Navbar from './components/Navbar'
 import Home from './components/Home';
 import { gapi } from 'gapi-script';
+import Basic from './components/Basic';
 
 const App = () => {
    const clientId = process.env.REACT_APP_CLIENT_ID;
+     const [user, setUser] = useState(null);
+
+       const handleLogout = () => {
+
+         setUser(null);
+         localStorage.removeItem('userData');
+  
+     
+      
+       };
 useEffect(()=>{
 function start(){
     gapi.client.init({
@@ -19,10 +30,10 @@ function start(){
 
   return (
     <div>
-      <Navbar/>
+      <Navbar user={user} setUser={setUser} onLogout={handleLogout}/>
        <Routes>
-        
-                <Route path="/home" element={<Home />} />
+         <Route path="/" element={<Basic />} />
+         <Route path="/home" element={<Home />} />
                  
                 </Routes>
     </div>

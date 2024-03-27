@@ -1,6 +1,6 @@
 // SignIn.js
 import React, { useState, useEffect } from 'react';
-import  GoogleLogin  from 'react-google-login';
+import  GoogleLogin, { GoogleLogout }  from 'react-google-login';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -15,10 +15,19 @@ const SignIn = ({ toggle }) => {
     e.preventDefault();
     // Handle login
   };
-  
+
 const handleSuccess=(res)=>{
   console.log("Login success",res.profileObj);
-  navigate('/home')
+  
+const userData = {
+        googleId: res.profileObj.googleId,
+        imageUrl: res.profileObj.imageUrl,
+        email: res.profileObj.email,
+        name: res.profileObj.name,
+        givenName: res.profileObj.givenName,
+        familyName: res.profileObj.familyName
+    };
+     localStorage.setItem('userData', JSON.stringify(userData));
 }
 
   return (
@@ -46,7 +55,11 @@ const handleSuccess=(res)=>{
                         cookiePolicy={'single_host_origin'}
                         isSignedIn={true}
                         onSuccess={handleSuccess}
+                        redirectUri={'http://localhost:3000/home'}
+                        uxMode={'redirect'}
+                        
                         />
+                        
                           
     </div>
   );
