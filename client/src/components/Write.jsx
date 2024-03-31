@@ -1,26 +1,17 @@
-import React, { useState } from 'react';
-import { Slate, Editable, withReact } from 'slate-react';
-import { createEditor } from 'slate';
+import React,{useState} from 'react'
+import { Tiptap } from './TipTap'
+
+import Details from './Details';
 
 const Write = () => {
-  const [initialValue, setInitialValue] = useState([
-    {
-      type: 'paragraph',
-      children: [{ text: 'I am an editor' }],
-    },
-  ]);
-
-  const editor = withReact(createEditor());
-
-  const handleChange = (newValue) => {
-    setInitialValue(newValue);
-  };
-
+    const [description, setDescription] = useState("");
   return (
-    <Slate editor={editor} initialValue={initialValue} onChange={handleChange}>
-      <Editable />
-    </Slate>
-  );
-};
+    <>
+     <Tiptap setDescription={setDescription} />
+    {/* <Details description={description} /> */}
+    </>
+ 
+  )
+}
 
-export default Write;
+export default Write
