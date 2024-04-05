@@ -18,6 +18,9 @@ const Navbar = ({ user, setUser, onLogout }) => {
       setIsDropdownOpen(false);
     }
   };
+ useEffect(()=>{
+  console.log("your user is here ", user);
+ },[])
 
   useEffect(() => {
     document.addEventListener('click', handleClickOutside);

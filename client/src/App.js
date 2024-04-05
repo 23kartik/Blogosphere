@@ -23,15 +23,23 @@ const App = () => {
      
       
        };
-useEffect(()=>{
-function start(){
-    gapi.client.init({
-      clientId:clientId,
-      scope:""
-    })
-  };
-  gapi.load('client:auth2',start)
-})
+  useEffect(() => {
+    const userData = localStorage.getItem('userData');
+    if (userData) {
+      setUser(JSON.parse(userData));
+    }
+  }, []);
+
+    
+  useEffect(() => {
+    function start() {
+      gapi.client.init({
+        clientId: clientId,
+        scope: ""
+      });
+    }
+    gapi.load('client:auth2', start);
+  });
 
   return (
     <div>
